@@ -107,3 +107,34 @@ h1 {
     font-size: 110%;
     cursor: pointer;
 }
+
+#end-card {
+    display: none;
+    width: 400px;
+}
+
+#initials-input {
+    border: solid 1px var(--dark);
+    border-radius: 3px;
+    min-width: 200px;
+    height: 25px;
+}
+
+#submit-button {
+    background-color: var(--accent2);
+    border: solid 2px var(--dark);
+    color: var(--dark);
+    /* font-size: 100%; */
+    border-radius: 3px;
+    padding: 5px;
+    /* padding-left: 10px; */
+    /* transition: 0.2s; */
+}
+
+#submit-button:hover {
+    background-color: #b37296;
+    border: solid 2px var(--dark);
+    box-shadow: 2px 2px 5px var(--dark);
+    /* font-size: 90%; */
+    cursor: pointer;
+}

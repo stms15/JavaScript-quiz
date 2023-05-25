@@ -41,6 +41,8 @@ function randomAnswers(counter) {
 
 
 var startCardEl = document.querySelector("#start-card");
+var startBttnEl = document.querySelector("#start-button");
+
 var quizContainerEl = document.querySelector(".question-container");
 var questionEl = document.querySelector("#quiz-q");
 var ans1El = document.querySelector('#quiz-ans-1');
@@ -48,7 +50,10 @@ var ans2El = document.querySelector('#quiz-ans-2');
 var ans3El = document.querySelector('#quiz-ans-3');
 var ans4El = document.querySelector('#quiz-ans-4');
 var answersEl = [ans1El, ans2El, ans3El, ans4El];
-var startBttnEl = document.querySelector("#start-button");
+
+var endCardEl = document.querySelector('#end-card');
+var finalScoreEl = document.querySelector('#final-score');
+var submitBttnEl = document.querySelector('#submit-button');
 
 startBttnEl.addEventListener("click", function() {
     startCardEl.setAttribute("style", "display: none");
@@ -64,11 +69,14 @@ startBttnEl.addEventListener("click", function() {
 var counter = 1;
 
 quizContainerEl.addEventListener("click", function(){
-    if (counter < 4){
+    if (counter < 5){
         questionEl.textContent = quizQuestions.question[counter];
         randomAnswers(counter);
         counter++;
-    } else {
+    } else if (counter === 5) {
+        finalScoreEl.textContent = "Your final score is";
+        quizContainerEl.setAttribute("style", "display: none");
+        endCardEl.setAttribute("style", "display: flex");
         counter = 1;
     }
 })
