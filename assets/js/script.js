@@ -1,3 +1,4 @@
+// Object with lists of quiz questions and answers
 var quizQuestions = {
     question: ['How do you define a variable?', 
     "What's the correct syntax of the following code?", 
@@ -15,3 +16,26 @@ var quizQuestions = {
     ['document.item', 'document("item")', 'document.getElement(id="item")'], 
     ['no', "I don't know, stop asking me questions", 'sometimes']]
 }
+
+
+var cardEl = document.querySelector(".card");
+var quizContainerEl = document.querySelector(".question-container");
+var questionEl = document.querySelector("#quiz-q");
+var ans1El = document.querySelector('#quiz-ans-1');
+var ans2El = document.querySelector('#quiz-ans-2');
+var ans3El = document.querySelector('#quiz-ans-3');
+var ans4El = document.querySelector('#quiz-ans-4');
+var startBttnEl = document.querySelector("#start-button");
+
+startBttnEl.addEventListener("click", function() {
+    cardEl.setAttribute("style", "display: none");
+
+    console.log(questionEl.textContent);
+    questionEl.textContent = quizQuestions.question[0];
+    ans1El.textContent = quizQuestions.correctAnswer[0];
+    ans2El.textContent = quizQuestions.fillers[0][0];
+    ans3El.textContent = quizQuestions.fillers[0][1];
+    ans4El.textContent = quizQuestions.fillers[0][2];
+
+    quizContainerEl.setAttribute("style", "display: block");
+})
