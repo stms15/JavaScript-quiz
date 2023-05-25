@@ -17,25 +17,60 @@ var quizQuestions = {
     ['no', "I don't know, stop asking me questions", 'sometimes']]
 }
 
+function randomAnswers(counter) {
+    var answers = quizQuestions.fillers[counter];
+    answers.push(quizQuestions.correctAnswer[counter]);
 
-var cardEl = document.querySelector(".card");
+    var prevInd = [];
+    for (let i=0; i<answers.length; i++){
+        var index = Math.floor(Math.random() * answers.length);
+        var breakloop = false;
+
+        while(!breakloop){
+            if (prevInd.every(element => element !== index)) {
+                answersEl[index].textContent = answers[i];
+                prevInd.push(index);
+                breakloop = true;
+                break;
+            } else {
+                index = Math.floor(Math.random() * answers.length);
+            }
+        }
+    }
+}
+
+
+var startCardEl = document.querySelector("#start-card");
 var quizContainerEl = document.querySelector(".question-container");
 var questionEl = document.querySelector("#quiz-q");
 var ans1El = document.querySelector('#quiz-ans-1');
 var ans2El = document.querySelector('#quiz-ans-2');
 var ans3El = document.querySelector('#quiz-ans-3');
 var ans4El = document.querySelector('#quiz-ans-4');
+var answersEl = [ans1El, ans2El, ans3El, ans4El];
 var startBttnEl = document.querySelector("#start-button");
 
 startBttnEl.addEventListener("click", function() {
-    cardEl.setAttribute("style", "display: none");
+    startCardEl.setAttribute("style", "display: none");
 
     console.log(questionEl.textContent);
     questionEl.textContent = quizQuestions.question[0];
-    ans1El.textContent = quizQuestions.correctAnswer[0];
-    ans2El.textContent = quizQuestions.fillers[0][0];
-    ans3El.textContent = quizQuestions.fillers[0][1];
-    ans4El.textContent = quizQuestions.fillers[0][2];
+    randomAnswers(0);
 
     quizContainerEl.setAttribute("style", "display: block");
 })
+
+
+var counter = 1;
+
+quizContainerEl.addEventListener("click", function(){
+    if (counter < 4){
+        questionEl.textContent = quizQuestions.question[counter];
+        randomAnswers(counter);
+        counter++;
+    } else {
+        counter = 1;
+    }
+})
+
+console.log(counter);
