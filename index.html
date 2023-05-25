@@ -15,11 +15,21 @@
         </header>
         <section>
             <div class="card">
+            <!-- <div class="question-container"> -->
                 <h1>JavaScript Coding Quiz</h1>
-                <p>
+                <p id="init-description">
                     Before starting, please note that this is a timed quiz with questions about JavaScript. Your score will be saved and added to the leaderboard, which can be viewed using the link in the top left corner. When you're ready, click the button to begin!
                 </p>
                 <button id="start-button">Start Quiz</button>
+            </div>
+            <div class="question-container">
+                <h2 id="quiz-q"></h2>
+                <ul>
+                    <li><button id="quiz-ans-1"></button></li>
+                    <li><button id="quiz-ans-2"></button></li>
+                    <li><button id="quiz-ans-3"></button></li>
+                    <li><button id="quiz-ans-4"></button></li>
+                </ul>
             </div>
         </section>
         <script src="./assets/js/script.js"></script>
