@@ -44,10 +44,25 @@ function randomAnswers(counter) {
 }
 
 function endQuiz () {
-    finalScoreEl.textContent = "Your final score is";
+    finalScoreEl.textContent = "Your final score is " + secondsLeft;
     quizContainerEl.setAttribute("style", "display: none");
     endCardEl.setAttribute("style", "display: flex");
     counter = 1;
+}
+
+function setTime () {
+    timeEl.textContent = "Time left: " + secondsLeft + 's';
+    var timeInterval = setInterval(function(){
+        secondsLeft = secondsLeft - 1 - extraSeconds;
+        timeEl.textContent = "Time left: " + secondsLeft + 's';
+
+        if (secondsLeft === 0) {
+            endQuiz();
+            clearInterval(timeInterval);
+        } else if (counter === 5) {
+            clearInterval(timeInterval);
+        }
+    }, 1000);
 }
 
 // ----- End Functions ----- //
@@ -69,6 +84,11 @@ var finalScoreEl = document.querySelector('#final-score');
 var initialsInput = document.getElementById('initials-input');
 var submitBttnEl = document.querySelector('#submit-button');
 
+var timeEl = document.querySelector('#time-left');
+var secondsLeft = 120;
+var extraSeconds = 0;
+
+
 startBttnEl.addEventListener("click", function() {
     startCardEl.setAttribute("style", "display: none");
 
@@ -77,8 +97,8 @@ startBttnEl.addEventListener("click", function() {
     randomAnswers(0);
 
     quizContainerEl.setAttribute("style", "display: block");
+    setTime();
 });
-
 
 var counter = 1;
 

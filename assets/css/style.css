@@ -11,6 +11,9 @@
 
 nav {
     margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 4px;
 }
 
 #scores-link {
@@ -67,7 +70,7 @@ h1 {
     flex-direction: column;
     /* justify-content: center; */
     /* align-items: flex-start; */
-    width: 600px;
+    max-width: 600px;
     padding: 20px;
     border: solid 2px var(--dark);
     border-radius: 5px;
