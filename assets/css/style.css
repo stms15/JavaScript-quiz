@@ -141,3 +141,9 @@ h1 {
     /* font-size: 90%; */
     cursor: pointer;
 }
+
+#correct-answer {
+    color: var(--accent3);
+    font-style: italic;
+    font-size: 110%;
+}

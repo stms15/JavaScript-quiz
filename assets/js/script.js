@@ -54,6 +54,7 @@ function setTime () {
     timeEl.textContent = "Time left: " + secondsLeft + 's';
     var timeInterval = setInterval(function(){
         secondsLeft = secondsLeft - 1 - extraSeconds;
+        extraSeconds = 0;
         timeEl.textContent = "Time left: " + secondsLeft + 's';
 
         if (secondsLeft === 0) {
@@ -87,6 +88,7 @@ var submitBttnEl = document.querySelector('#submit-button');
 var timeEl = document.querySelector('#time-left');
 var secondsLeft = 120;
 var extraSeconds = 0;
+var afterAnsDisplay = document.querySelector('#correct-answer');
 
 
 startBttnEl.addEventListener("click", function() {
@@ -102,7 +104,14 @@ startBttnEl.addEventListener("click", function() {
 
 var counter = 1;
 
-quizContainerEl.addEventListener("click", function(){
+quizContainerEl.addEventListener("click", function(event){
+    if (event.target.textContent == quizQuestions.correctAnswer[counter-1]) {
+        afterAnsDisplay.textContent = "Correct!";
+        extraSeconds = 0;
+    } else {
+        afterAnsDisplay.textContent = "Incorrect";
+        extraSeconds = 10;
+    }
     if (counter < 5){
         questionEl.textContent = quizQuestions.question[counter];
         randomAnswers(counter);
