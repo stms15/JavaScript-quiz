@@ -1,4 +1,4 @@
-// Object with lists of quiz questions and answers
+// ---- Quiz Questions & Answers ---- //
 var quizQuestions = {
     question: ['How do you define a variable?', 
     "What's the correct syntax of the following code?", 
@@ -15,7 +15,11 @@ var quizQuestions = {
     ['if statement1 or statement2 are true', 'if both statement1 and statement2 are false', 'it will always execute'], 
     ['document.item', 'document("item")', 'document.getElement(id="item")'], 
     ['no', "I don't know, stop asking me questions", 'sometimes']]
-}
+};
+
+// ----------------------- //
+
+// ------ Functions ------ //
 
 function randomAnswers(counter) {
     var answers = quizQuestions.fillers[counter];
@@ -39,6 +43,15 @@ function randomAnswers(counter) {
     }
 }
 
+function endQuiz () {
+    finalScoreEl.textContent = "Your final score is";
+    quizContainerEl.setAttribute("style", "display: none");
+    endCardEl.setAttribute("style", "display: flex");
+    counter = 1;
+}
+
+// ----- End Functions ----- //
+
 
 var startCardEl = document.querySelector("#start-card");
 var startBttnEl = document.querySelector("#start-button");
@@ -53,6 +66,7 @@ var answersEl = [ans1El, ans2El, ans3El, ans4El];
 
 var endCardEl = document.querySelector('#end-card');
 var finalScoreEl = document.querySelector('#final-score');
+var initialsInput = document.getElementById('initials-input');
 var submitBttnEl = document.querySelector('#submit-button');
 
 startBttnEl.addEventListener("click", function() {
@@ -63,7 +77,7 @@ startBttnEl.addEventListener("click", function() {
     randomAnswers(0);
 
     quizContainerEl.setAttribute("style", "display: block");
-})
+});
 
 
 var counter = 1;
@@ -74,11 +88,20 @@ quizContainerEl.addEventListener("click", function(){
         randomAnswers(counter);
         counter++;
     } else if (counter === 5) {
-        finalScoreEl.textContent = "Your final score is";
-        quizContainerEl.setAttribute("style", "display: none");
-        endCardEl.setAttribute("style", "display: flex");
-        counter = 1;
+        endQuiz();
     }
-})
+});
 
-console.log(counter);
+submitBttnEl.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    var lastScore = {
+        user: initialsInput.value,
+        score: '-',
+    };
+
+    localStorage.setItem("lastScore", JSON.stringify(lastScore));
+    console.log(JSON.parse(localStorage.getItem("lastScore")));
+
+    initialsInput.value = '';
+});
