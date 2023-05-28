@@ -32,7 +32,8 @@ function randomAnswers(qNum) {
 
         while(!breakloop){
             if (prevInd.every(element => element !== index)) {
-                answersEl[index].textContent = answers[i];
+                answersEl[index].value = answers[i];
+                answersEl[index].textContent = (index+1) + ". " + answers[i];
                 prevInd.push(index);
                 breakloop = true;
                 break;
@@ -52,14 +53,13 @@ function endQuiz () {
 function setTime () {
     timeEl.textContent = "Time left: " + secondsLeft + 's';
     var timeInterval = setInterval(function(){
-        secondsLeft = secondsLeft - 1 - extraSeconds;
-        extraSeconds = 0;
+        secondsLeft--;
         timeEl.textContent = "Time left: " + secondsLeft + 's';
 
         if (secondsLeft === 0) {
             endQuiz();
             clearInterval(timeInterval);
-        } else if (counter === 5) {
+        } else if (stopTime) {
             clearInterval(timeInterval);
         }
     }, 1000);
@@ -104,7 +104,7 @@ var submitBttnEl = document.querySelector('#submit-button');
 
 var timeEl = document.querySelector('#time-left');
 var secondsLeft = 100;
-var extraSeconds = 0;
+var stopTime = false;
 var afterAnsDisplay = document.querySelector('#correct-answer');
 
 // var leaderboardPage = window.open("../leaderboard.html");
@@ -124,18 +124,18 @@ startBttnEl.addEventListener("click", function() {
 var counter = 1;
 
 quizContainerEl.addEventListener("click", function(event){
-    if (event.target.textContent == quizQuestions.correctAnswer[counter-1]) {
+    if (event.target.value == quizQuestions.correctAnswer[counter-1]) {
         afterAnsDisplay.textContent = "Correct!";
-        extraSeconds = 0;
     } else {
         afterAnsDisplay.textContent = "Incorrect";
-        extraSeconds = 10;
+        secondsLeft = secondsLeft - 10;
     }
     if (counter < 5){
         questionEl.textContent = quizQuestions.question[counter];
         randomAnswers(counter);
         counter++;
     } else if (counter === 5) {
+        stopTime = true;
         endQuiz();
     }
 });
