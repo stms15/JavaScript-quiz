@@ -19,6 +19,7 @@ var quizQuestions = {
 
 // ----------------------- //
 
+
 // ------ Functions ------ //
 
 function randomAnswers(qNum) {
@@ -86,6 +87,8 @@ function compareScores(a, b) {
 // ----- End Functions ----- //
 
 
+// -------- Main -------- //
+
 var startCardEl = document.querySelector("#start-card");
 var startBttnEl = document.querySelector("#start-button");
 
@@ -107,7 +110,6 @@ var secondsLeft = 100;
 var stopTime = false;
 var afterAnsDisplay = document.querySelector('#correct-answer');
 
-// var leaderboardPage = window.open("../leaderboard.html");
 var leadersList = [];
 
 

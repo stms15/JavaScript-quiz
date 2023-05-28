@@ -1,6 +1,4 @@
 :root {
-    /* --accent2: #C19AB7; */
-    /* --accent3: #134E62; */
     --accent1: #DBE9F0;
     --accent2: #A1869E;
     --accent3: #534D76;
@@ -27,6 +25,7 @@ nav {
     border: solid 2px var(--dark);
 }
 
+/* ----- Main classes ----- */
 
 section {
     display: flex;
@@ -94,8 +93,6 @@ h1 {
     text-align: left;
     background-color: var(--accent3);
     border: solid 2px var(--dark);
-    /* border: none; */
-    /* color: var(--dark); */
     color: whitesmoke;
     font-size: 100%;
     border-radius: 3px;
@@ -107,7 +104,6 @@ h1 {
     background-color: var(--accent2);
     border: solid 2px var(--dark);
     color: var(--dark);
-    /* border: none; */
     box-shadow: 2px 2px 5px var(--dark);
     font-size: 110%;
     cursor: pointer;
@@ -148,7 +144,7 @@ h1 {
 }
 
 
-/* ----- Leaderboard Page Specifics ----- */
+/* ----- Leaderboard Page Classes ----- */
 
 #leaderboard {
     list-style-type: none;
