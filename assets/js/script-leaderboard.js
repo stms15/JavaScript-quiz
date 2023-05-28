@@ -3,9 +3,7 @@ var clearBttn = document.getElementById('clear-board');
 
 leaders = JSON.parse(localStorage.getItem("leadersList"));
 
-for (let i=0; i<leaderboardList.children.length; i++){
-    leaderboardList.removeChild(leaderboardList.children[i]);
-}
+leaderboardList.innerHTML = '';
 for (let j=0; j<leaders.length; j++){
     var newLiEl = document.createElement("li");
     newLiEl.textContent = leaders[j].user + " - " + leaders[j].score;
@@ -13,6 +11,6 @@ for (let j=0; j<leaders.length; j++){
 }
 
 clearBttn.addEventListener("click", function() {
-    leaderboardList.innerHTML = "";
+    leaderboardList.innerHTML = '';
     localStorage.setItem("leadersList", null);
 })
