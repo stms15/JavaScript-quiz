@@ -21,9 +21,9 @@ var quizQuestions = {
 
 // ------ Functions ------ //
 
-function randomAnswers(counter) {
-    var answers = quizQuestions.fillers[counter];
-    answers.push(quizQuestions.correctAnswer[counter]);
+function randomAnswers(qNum) {
+    var answers = JSON.parse(JSON.stringify(quizQuestions.fillers[qNum]));
+    answers.push(quizQuestions.correctAnswer[qNum]);
 
     var prevInd = [];
     for (let i=0; i<answers.length; i++){
@@ -47,7 +47,6 @@ function endQuiz () {
     finalScoreEl.textContent = "Your final score is " + secondsLeft;
     quizContainerEl.setAttribute("style", "display: none");
     endCardEl.setAttribute("style", "display: flex");
-    counter = 1;
 }
 
 function setTime () {
@@ -64,6 +63,24 @@ function setTime () {
             clearInterval(timeInterval);
         }
     }, 1000);
+}
+
+function reset() {
+    quizContainerEl.setAttribute('style', 'display: none');
+    endCardEl.setAttribute('style', 'display: none');
+    startCardEl.setAttribute('style', 'display: flex');
+    counter = 1;
+    secondsLeft = 100;
+}
+
+function compareScores(a, b) {
+    if (a.score < b.score) {
+        return 1;
+    } else if (a.score > b.score) {
+        return -1;
+    } else {
+        return 0;
+    }
 }
 
 // ----- End Functions ----- //
@@ -86,15 +103,17 @@ var initialsInput = document.getElementById('initials-input');
 var submitBttnEl = document.querySelector('#submit-button');
 
 var timeEl = document.querySelector('#time-left');
-var secondsLeft = 120;
+var secondsLeft = 100;
 var extraSeconds = 0;
 var afterAnsDisplay = document.querySelector('#correct-answer');
+
+// var leaderboardPage = window.open("../leaderboard.html");
+var leadersList = [];
 
 
 startBttnEl.addEventListener("click", function() {
     startCardEl.setAttribute("style", "display: none");
 
-    console.log(questionEl.textContent);
     questionEl.textContent = quizQuestions.question[0];
     randomAnswers(0);
 
@@ -124,13 +143,20 @@ quizContainerEl.addEventListener("click", function(event){
 submitBttnEl.addEventListener("click", function(event) {
     event.preventDefault();
 
+    var loadStoredScores = JSON.parse(localStorage.getItem("leadersList"));
+    if (loadStoredScores !== null) {
+        leadersList = loadStoredScores;
+    }
+
     var lastScore = {
         user: initialsInput.value,
-        score: '-',
+        score: secondsLeft,
     };
+    leadersList.push(lastScore);
+    leadersList.sort(compareScores);
 
-    localStorage.setItem("lastScore", JSON.stringify(lastScore));
-    console.log(JSON.parse(localStorage.getItem("lastScore")));
+    localStorage.setItem("leadersList", JSON.stringify(leadersList));
 
     initialsInput.value = '';
+    reset();
 });
