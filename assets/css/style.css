@@ -154,6 +154,7 @@ h1 {
     list-style-type: none;
     padding: 0;
     font-size: larger;
+    counter-reset: li;
 }
 
 #leaderboard li {
