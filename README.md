@@ -40,7 +40,8 @@ You can view the highscores using the "Leaderboard" link in the top left corner.
 Here you will see a list of the saved scores in order from highest to lowest. You can use the "Close" button to exit the leaderboard and go back to the quiz, or you can click the "Clear Scores" button to wipe the highscores.
 ![a list of scores from highest to lowest and a "Close" button and "Clear Scores" button](./assets/images/JavaScriptQuiz-LeaderboardPage.png)
 
-You can access the entire website here: https://stms15.github.io/JavaScript-quiz/. 
+A screenshot of the main page can be seen below and the entire website can be accessed here: https://stms15.github.io/JavaScript-quiz/. To see each question and test the functionality, try the quiz!
+![JavaScript Quiz title with a paragraph explaining the website and a "Start Quiz" button](./assets/images/JavaScriptQuiz-MainPage.png)
 
 ## Credits
 
